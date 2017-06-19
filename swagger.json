@@ -60,11 +60,11 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "pet response",
+                        "description": "wine response",
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/pet"
+                                "$ref": "#/definitions/wine"
                             }
                         }
                     },
@@ -77,8 +77,8 @@
                 }
             },
             "post": {
-                "description": "Creates a new pet in the store.  Duplicates are allowed",
-                "operationId": "addPet",
+                "description": "Cadastra um novo vinho no estoque.",
+                "operationId": "addVinho",
                 "produces": [
                     "application/json"
                 ],
@@ -111,8 +111,8 @@
         },
         "/pets/{id}": {
             "get": {
-                "description": "Returns a user based on a single ID, if the user does not have access to the pet",
-                "operationId": "findPetById",
+                "description": "Carrega um vinho baseado no identificador único.",
+                "operationId": "findVinhoById",
                 "produces": [
                     "application/json",
                     "application/xml",
@@ -145,8 +145,8 @@
                 }
             },
             "delete": {
-                "description": "deletes a single pet based on the ID supplied",
-                "operationId": "deletePet",
+                "description": "Deleta um vinho do estoque pelo identificador único.",
+                "operationId": "deleteVinho",
                 "parameters": [
                     {
                         "name": "id",
@@ -172,7 +172,7 @@
         }
     },
     "definitions": {
-        "pet": {
+        "wine": {
             "type": "object",
             "required": [
                 "id",
