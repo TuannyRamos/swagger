@@ -1,0 +1,145 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Vinhos API
+  description: Uma simples API que demonstra como exemplo um CRUD para loja de vinhos.
+  termsOfService: 'http://helloreverb.com/terms/'
+  contact:
+    name: Tuanny C. S. Ramos
+    email: ramostuanny@gmail.com
+    url: 'http://swagger.io'
+  license:
+    name: MIT
+    url: 'http://opensource.org/licenses/MIT'
+host: winestore.swagger.io
+basePath: /api
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /vinhos:
+    get:
+      description: Retorna todos os vinhos que podem ser acessados pelo usuário no sistema.
+      operationId: findVinhos
+      produces:
+        - application/json
+        - application/xml
+        - text/xml
+        - text/html
+      responses:
+        '200':
+          description: Executado com sucesso
+        '400':
+          description: Erro no cliente
+        '500':
+          description: Erro interno no servidor
+        default:
+          description: Erro inesperado
+          schema:
+            $ref: '#/definitions/errorModel'
+    post:
+      description: Cadastra um novo vinho no estoque.
+      operationId: addVinho
+      produces:
+        - application/json
+      parameters:
+        - name: vinho
+          in: body
+          description: Objeto a ser cadastrado
+          required: true
+          schema:
+            $ref: '#/definitions/novoVinho'
+      responses:
+        '200':
+          description: Inserido com sucesso
+        '400':
+          description: Erro no cliente
+        '500':
+          description: Erro interno no servidor
+        default:
+          description: Erro inesperado
+          schema:
+            $ref: '#/definitions/errorModel'
+  '/vinhos/{id}':
+    get:
+      description: Carrega um vinho baseado no identificador único.
+      operationId: findVinhoById
+      produces:
+        - application/json
+        - application/xml
+        - text/xml
+        - text/html
+      parameters:
+        - name: id
+          in: path
+          description: Id do vinho para busca
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Executado com sucesso
+        '400':
+          description: Erro no cliente
+        '500':
+          description: Erro interno no servidor
+        default:
+          description: Erro inesperado
+          schema:
+            $ref: '#/definitions/errorModel'
+    delete:
+      description: Exclui um vinho do estoque pelo identificador único.
+      operationId: deleteVinho
+      parameters:
+        - name: id
+          in: path
+          description: ID do vinho para exclusão
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Excluído com sucesso
+        '400':
+          description: Erro no cliente
+        '500':
+          description: Erro interno no servidor
+        default:
+          description: Erro inesperado
+          schema:
+            $ref: '#/definitions/errorModel'
+definitions:
+  vinho:
+    type: object
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      ano:
+        type: integer
+  novoVinho:
+    type: object
+    required:
+      - id
+      - name
+      - ano
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      ano:
+        type: integer
+  errorModel:
+    type: object
+    required:
+      - code
+      - message
+    properties:
+      code:
+        type: integer
+      message:
+        type: string

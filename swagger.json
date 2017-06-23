@@ -91,7 +91,7 @@
         }
       }
     },
-    "/pets/{id}": {
+    "/vinhos/{id}": {
       "get": {
         "description": "Carrega um vinho baseado no identificador único.",
         "operationId": "findVinhoById",
